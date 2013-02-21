@@ -5,8 +5,8 @@
  * PHP version 5
  *
  * LICENSE:
- * 
- * Copyright (c) 2011, Bertrand Mansion <golgote@mamasam.com>
+ *
+ * Copyright (c) 2013, Bertrand Mansion <mansion@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,9 +16,9 @@
  *    * Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
  *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the 
+ *      notice, this list of conditions and the following disclaimer in the
  *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products 
+ *    * The names of the authors may not be used to endorse or promote products
  *      derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
@@ -35,9 +35,8 @@
  *
  * @category Net
  * @package  Net_URL_Mapper
- * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @author   Bertrand Mansion <mansion@php.net>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  CVS: $Id$
  * @link     http://pear.php.net/package/Net_URL_Mapper
  */
 
@@ -52,9 +51,8 @@ require_once 'Net/URL/Mapper/Exception.php';
  *
  * @category Net
  * @package  Net_URL_Mapper
- * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @author   Bertrand Mansion <mansion@php.net>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: @package_version@
  * @link     http://pear.php.net/package/Net_URL_Mapper
  */
 class Net_URL_Mapper
@@ -93,17 +91,17 @@ class Net_URL_Mapper
     * Class constructor
     * Constructor is private, you should use getInstance() instead.
     */
-    private function __construct() 
+    private function __construct()
     {
     }
 
     /**
-     * Returns a singleton object corresponding to the requested instance id
-     *
-     * @param string $id Requested instance name
-     *
-     * @return Object Net_URL_Mapper Singleton
-     */
+    * Returns a singleton object corresponding to the requested instance id
+    *
+    * @param string $id Requested instance name
+    *
+    * @return Object Net_URL_Mapper Singleton
+    */
     public static function getInstance($id = '__default__')
     {
         if (!isset(self::$_instances[$id])) {
@@ -115,27 +113,27 @@ class Net_URL_Mapper
     }
 
     /**
-     * Returns the instance id
-     *
-     * @return string Mapper instance id
-     */
+    * Returns the instance id
+    *
+    * @return string Mapper instance id
+    */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Parses a path and creates a connection
-     *
-     * @param string $path     The path to connect
-     * @param array  $defaults Default values for path parts
-     * @param array  $rules    Regular expressions for path parts
-     * @param string $alias    Name the route for easy referencing
-     *
-     * @return object Net_URL_Mapper_Path
-     */
+    * Parses a path and creates a connection
+    *
+    * @param string $path     The path to connect
+    * @param array  $defaults Default values for path parts
+    * @param array  $rules    Regular expressions for path parts
+    * @param string $alias    Name the route for easy referencing
+    *
+    * @return object Net_URL_Mapper_Path
+    */
     public function connect($path, $defaults = array(), $rules = array(),
-        $alias = null 
+        $alias = null
     ) {
         $pathObj = new Net_URL_Mapper_Path($path, $defaults, $rules, $alias);
         $this->addPath($pathObj);
@@ -143,39 +141,39 @@ class Net_URL_Mapper
     }
 
     /**
-     * Set the url prefix if needed
-     *
-     * Example: using the prefix to differenciate mapper instances
-     * <code>
-     * $fr = Net_URL_Mapper::getInstance('fr');
-     * $fr->setPrefix('/fr');
-     * $en = Net_URL_Mapper::getInstance('en');
-     * $en->setPrefix('/en');
-     * </code>
-     *
-     * @param string $prefix URL prefix
-     *
-     * @return void
-     */
+    * Set the url prefix if needed
+    *
+    * Example: using the prefix to differenciate mapper instances
+    * <code>
+    * $fr = Net_URL_Mapper::getInstance('fr');
+    * $fr->setPrefix('/fr');
+    * $en = Net_URL_Mapper::getInstance('en');
+    * $en->setPrefix('/en');
+    * </code>
+    *
+    * @param string $prefix URL prefix
+    *
+    * @return void
+    */
     public function setPrefix($prefix)
     {
-        $this->prefix = '/'.trim($prefix, '/');
+        $this->prefix = '/'.ltrim($prefix, '/');
     }
 
     /**
-     * Set the scriptname if mod_rewrite not available
-     *
-     * Example: will match and generate url like
-     * - index.php/view/product/1
-     * <code>
-     * $m = Net_URL_Mapper::getInstance();
-     * $m->setScriptname('index.php');
-     * </code>
-     *
-     * @param string $scriptname URL prefix
-     *
-     * @return void
-     */
+    * Set the scriptname if mod_rewrite not available
+    *
+    * Example: will match and generate url like
+    * - index.php/view/product/1
+    * <code>
+    * $m = Net_URL_Mapper::getInstance();
+    * $m->setScriptname('index.php');
+    * </code>
+    *
+    * @param string $scriptname URL prefix
+    *
+    * @return void
+    */
     public function setScriptname($scriptname)
     {
         $this->scriptname = $scriptname;
@@ -190,20 +188,23 @@ class Net_URL_Mapper
     * thrown.
     *
     * @param string $url URL
-    * 
+    *
     * @return   array|null   array if match found, null otherwise
-    * 
+    *
     * @throws   Net_URL_Mapper_InvalidException
     */
     public function match($url)
     {
-        $nurl = '/'.trim($url, '/');
+        $nurl = '/'.ltrim($url, '/');
 
         // Remove scriptname if needed
-        $regex = '/^' . preg_quote($this->scriptname) . '/';
-        $nurl = preg_replace($regex, '', $nurl);
-        if (empty($nurl)) {
-            $nurl = '/';
+
+        if (!empty($this->scriptname) &&
+            strpos($nurl, $this->scriptname) === 0) {
+            $nurl = substr($nurl, strlen($this->scriptname));
+            if (empty($nurl)) {
+                $nurl = '/';
+            }
         }
 
         // Remove prefix
@@ -216,10 +217,12 @@ class Net_URL_Mapper
                 $nurl = '/';
             }
         }
-        
+
         // Remove query string
 
-        list($nurl) = explode('?', $nurl, 2);
+        if (($pos = strpos($nurl, '?')) !== false) {
+            $nurl = substr($nurl, 0, $pos);
+        }
 
         $paths = array();
         $values = null;
@@ -230,7 +233,7 @@ class Net_URL_Mapper
             $regex = $path->getFormat();
             if (preg_match($regex, $nurl)) {
                 $paths[] = $path;
-            }   
+            }
         }
 
         // Make sure one of the paths found is valid
@@ -266,17 +269,17 @@ class Net_URL_Mapper
     }
 
     /**
-     * Generate an url based on given parameters
-     *
-     * Will attempt to find a path definition that matches the given parameters and
-     * will generate an url based on this path.
-     *
-     * @param array  $values  Values to be used for the url generation
-     * @param array  $qstring Key/value pairs for query string if needed
-     * @param string $anchor  Anchor (fragment) if needed
-     * 
-     * @return string|false String if a rule was found, false otherwise
-     */
+    * Generate an url based on given parameters
+    *
+    * Will attempt to find a path definition that matches the given parameters and
+    * will generate an url based on this path.
+    *
+    * @param array  $values  Values to be used for the url generation
+    * @param array  $qstring Key/value pairs for query string if needed
+    * @param string $anchor  Anchor (fragment) if needed
+    *
+    * @return string|false String if a rule was found, false otherwise
+    */
     public function generate($values = array(), $qstring = array(), $anchor = '')
     {
         // Use root path if any
@@ -317,16 +320,16 @@ class Net_URL_Mapper
     /**
     * Generate an url based off a route
     *
-    * Will attempt to find a path based on the path's alias. 
+    * Will attempt to find a path based on the path's alias.
     *
     * @param array  $alias   Alias to be used to look up the path
     * @param array  $values  Values to be used for the url generation
     * @param array  $qstring Key/value pairs for query string if needed
     * @param string $anchor  Anchor (fragment) if needed
-    * 
+    *
     * @return string|false   String if a rule was found, false otherwise
     */
-    public function generateFromAlias($alias, $values = array(), $qstring = array(), 
+    public function generateFromAlias($alias, $values = array(), $qstring = array(),
         $anchor = ''
     ) {
         foreach ($this->paths as $path) {
@@ -361,21 +364,21 @@ class Net_URL_Mapper
     }
 
     /**
-     * Returns defined paths
-     * 
-     * @return array Array of paths
-     */
+    * Returns defined paths
+    *
+    * @return array Array of paths
+    */
     public function getPaths()
     {
         return $this->paths;
     }
 
     /**
-     * Reset all paths
-     * This is probably only useful for testing
-     * 
-     * @return void
-     */
+    * Reset all paths
+    * This is probably only useful for testing
+    *
+    * @return void
+    */
     public function reset()
     {
         $this->paths = array();
@@ -383,16 +386,41 @@ class Net_URL_Mapper
     }
 
     /**
-     * Add a new path to the mapper
-     * 
-     * @param Net_URL_Mapper_Path $path object
-     * 
-     * @return void
-     */
+    * Add a new path to the mapper
+    *
+    * @param Net_URL_Mapper_Path $path object
+    *
+    * @return void
+    */
     public function addPath(Net_URL_Mapper_Path $path)
     {
         $this->paths[$path->getPath()] = $path;
     }
 
+    /**
+    * Resolves relative path and returns an absolute path
+    * For example :
+    * /foo/bar/../boo.php    => /foo/boo.php
+    * /foo/bar/../../boo.php => /boo.php
+    * /foo/bar/.././/boo.php => /foo/boo.php
+    *
+    * @author pguardiario
+    * @see https://github.com/monkeysuffrage/phpuri
+    * @param  string $path  Relative path to resolve
+    * @return string        Absolute path
+    */
+    public static function resolvePath($path)
+    {
+        if (empty($path)) {
+            return '';
+        }
+        $normalized_path = $path;
+        $normalized_path = preg_replace('`//+`', '/' , $normalized_path, -1, $c0);
+        $normalized_path = preg_replace('`^/\\.\\.?/`', '/' , $normalized_path, -1, $c1);
+        $normalized_path = preg_replace('`/\\.(/|$)`', '/' , $normalized_path, -1, $c2);
+        $normalized_path = preg_replace('`/[^/]*?/\\.\\.(/|$)`', '/' , $normalized_path, -1, $c3);
+        $num_matches = $c0 + $c1 + $c2 + $c3;
+        return ($num_matches > 0) ? self::resolvePath($normalized_path) : $normalized_path;
+    }
 }
 ?>
