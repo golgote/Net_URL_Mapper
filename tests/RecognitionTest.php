@@ -41,8 +41,6 @@
  * @link       http://pear.php.net/package/Net_URL_Mapper
  */
 
-set_include_path('.:'.realpath(__DIR__.'/../../../').'/:/usr/local/lib/php/');
-
 /**
  * Mapper class
  */
