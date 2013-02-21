@@ -12,7 +12,7 @@ own router.</description>
  <lead>
   <name>Bertrand Mansion</name>
   <user>mansion</user>
-  <email>golgote@mamasam.com</email>
+  <email>mansion@php.net</email>
   <active>yes</active>
  </lead>
  <date>2010-10-25</date>
@@ -60,11 +60,6 @@ Bug #17271 small tweaks required to get unit tests working w phpunit3 - kguest
    <pearinstaller>
     <min>1.4.3</min>
    </pearinstaller>
-   <package>
-    <name>Net_URL</name>
-    <channel>pear.php.net</channel>
-    <min>1.0.14</min>
-   </package>
   </required>
  </dependencies>
  <phprelease>
