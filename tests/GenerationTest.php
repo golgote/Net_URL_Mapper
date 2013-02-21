@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006, Bertrand Mansion <golgote@mamasam.com>
+ * Copyright (c) 2013, Bertrand Mansion <mansion@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -115,24 +115,24 @@ class GenerationTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('/blog/view/0', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>'0')));
         $this->assertEquals('/blog/view/0', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>0)));
-        $this->assertEquals('/blog/view', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
-        $this->assertEquals('/blog/view', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
-        $this->assertEquals('/article', $m->generate(array('page'=>null)));
-        $this->assertEquals('/article', $m->generate(array('page'=>false)));
+        $this->assertEquals('/blog/view/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
+        $this->assertEquals('/blog/view/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/article/', $m->generate(array('page'=>null)));
+        $this->assertEquals('/article/', $m->generate(array('page'=>false)));
         $this->assertEquals('/article/0', $m->generate(array('page'=>0)));
 
         $this->assertEquals('/blog/view/0', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>'0')));
         $this->assertEquals('/blog/view/0', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>0)));
-        $this->assertEquals('/blog/view', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
-        $this->assertEquals('/blog/view', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
-        $this->assertEquals('/article', $m->generateFromAlias('article', array('page'=>null)));
-        $this->assertEquals('/article', $m->generateFromAlias('article', array('page'=>false)));
+        $this->assertEquals('/blog/view/', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
+        $this->assertEquals('/blog/view/', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/article/', $m->generateFromAlias('article', array('page'=>null)));
+        $this->assertEquals('/article/', $m->generateFromAlias('article', array('page'=>false)));
         $this->assertEquals('/article/0', $m->generateFromAlias('article', array('page'=>0)));
 
-        $this->assertEquals('/view/sumatra', $m->generate(array('home'=>'sumatra')));
+        $this->assertEquals('/view/sumatra/', $m->generate(array('home'=>'sumatra')));
         $this->assertEquals('/view/austere/chicago', $m->generate(array('area'=>'chicago')));
 
-        $this->assertEquals('/view/sumatra', $m->generateFromAlias('home', array('home'=>'sumatra')));
+        $this->assertEquals('/view/sumatra/', $m->generateFromAlias('home', array('home'=>'sumatra')));
         $this->assertEquals('/view/austere/chicago', $m->generateFromAlias('home', array('area'=>'chicago')));
 
         $this->assertEquals(array('home'=>'austere', 'area'=>'chicago'), $m->match('/view/austere/chicago'));
@@ -161,24 +161,24 @@ class GenerationTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('/blog/view/0', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>'0')));
         $this->assertEquals('/blog/view/0', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>0)));
-        $this->assertEquals('/blog/view', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
-        $this->assertEquals('/blog/view', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
-        $this->assertEquals('/article', $m->generate(array('page'=>null)));
-        $this->assertEquals('/article', $m->generate(array('page'=>false)));
+        $this->assertEquals('/blog/view/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
+        $this->assertEquals('/blog/view/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/article/', $m->generate(array('page'=>null)));
+        $this->assertEquals('/article/', $m->generate(array('page'=>false)));
         $this->assertEquals('/article/0', $m->generate(array('page'=>0)));
 
         $this->assertEquals('/blog/view/0', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>'0')));
         $this->assertEquals('/blog/view/0', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>0)));
-        $this->assertEquals('/blog/view', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
-        $this->assertEquals('/blog/view', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
-        $this->assertEquals('/article', $m->generateFromAlias('article', array('page'=>null)));
-        $this->assertEquals('/article', $m->generateFromAlias('article', array('page'=>false)));
+        $this->assertEquals('/blog/view/', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>false)));
+        $this->assertEquals('/blog/view/', $m->generateFromAlias('controller', array('controller'=>'blog', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/article/', $m->generateFromAlias('article', array('page'=>null)));
+        $this->assertEquals('/article/', $m->generateFromAlias('article', array('page'=>false)));
         $this->assertEquals('/article/0', $m->generateFromAlias('article', array('page'=>0)));
 
-        $this->assertEquals('/view/sumatra', $m->generate(array('home'=>'sumatra')));
+        $this->assertEquals('/view/sumatra/', $m->generate(array('home'=>'sumatra')));
         $this->assertEquals('/view/austere/chicago', $m->generate(array('area'=>'chicago')));
 
-        $this->assertEquals('/view/sumatra', $m->generateFromAlias('view', array('home'=>'sumatra')));
+        $this->assertEquals('/view/sumatra/', $m->generateFromAlias('view', array('home'=>'sumatra')));
         $this->assertEquals('/view/austere/chicago', $m->generateFromAlias('view', array('area'=>'chicago')));
 
         $this->assertEquals(array('home'=>'austere', 'area'=>'chicago'), $m->match('/view/austere/chicago'));
@@ -207,14 +207,14 @@ class GenerationTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(false, $m->generate(array('name'=>'fox5')));
             $this->assertEquals(false, $m->generate(array('name'=>'something_is_up')));
             $this->assertEquals(false, $m->generate(array('name'=>'list people')));
-            $this->assertEquals('/hi', $m->generate(array('name'=>null)));
+            $this->assertEquals('/hi/', $m->generate(array('name'=>null)));
             $this->assertEquals(false, $m->generate());
 
             $this->assertEquals('/hi/index', $m->generateFromAlias($alias, array('name'=>'index')));
             $this->assertEquals(false, $m->generateFromAlias($alias, array('name'=>'fox5')));
             $this->assertEquals(false, $m->generateFromAlias($alias, array('name'=>'something_is_up')));
             $this->assertEquals(false, $m->generateFromAlias($alias, array('name'=>'list people')));
-            $this->assertEquals('/hi', $m->generateFromAlias($alias, array('name'=>null)));
+            $this->assertEquals('/hi/', $m->generateFromAlias($alias, array('name'=>null)));
             $this->assertEquals(false, $m->generateFromAlias($alias));
         }
     }
@@ -226,11 +226,11 @@ class GenerationTest extends PHPUnit_Framework_TestCase
             $m = Net_URL_Mapper::getInstance();
             $m->reset();
             $m->connect($path, null, null, $alias);
-            $this->assertEquals('/hi', $m->generate(array('file'=>null)));
+            $this->assertEquals('/hi/', $m->generate(array('file'=>null)));
             $this->assertEquals('/hi/books/learning_php.pdf', $m->generate(array('file'=>'books/learning_php.pdf')));
             $this->assertEquals('/hi/books/development%26whatever/learning_php.pdf', $m->generate(array('file'=>'books/development&whatever/learning_php.pdf')));
 
-            $this->assertEquals('/hi', $m->generateFromAlias($alias, array('file'=>null)));
+            $this->assertEquals('/hi/', $m->generateFromAlias($alias, array('file'=>null)));
             $this->assertEquals('/hi/books/learning_php.pdf', $m->generateFromAlias($alias, array('file'=>'books/learning_php.pdf')));
             $this->assertEquals('/hi/books/development%26whatever/learning_php.pdf', $m->generateFromAlias($alias, array('file'=>'books/development&whatever/learning_php.pdf')));
         }
@@ -279,12 +279,12 @@ class GenerationTest extends PHPUnit_Framework_TestCase
             $m = Net_URL_Mapper::getInstance();
             $m->reset();
             $m->connect($path, array('action'=>null, 'id'=>null), null, $alias);
-            $this->assertEquals('/content', $m->generate(array('controller'=>'content')));
-            $this->assertEquals('/content/list', $m->generate(array('controller'=>'content', 'action'=>'list')));
+            $this->assertEquals('/content/', $m->generate(array('controller'=>'content')));
+            $this->assertEquals('/content/list/', $m->generate(array('controller'=>'content', 'action'=>'list')));
             $this->assertEquals('/content/show/10', $m->generate(array('controller'=>'content','action'=>'show','id'=>'10')));
 
-            $this->assertEquals('/content', $m->generateFromAlias($alias, array('controller'=>'content')));
-            $this->assertEquals('/content/list', $m->generateFromAlias($alias, array('controller'=>'content', 'action'=>'list')));
+            $this->assertEquals('/content/', $m->generateFromAlias($alias, array('controller'=>'content')));
+            $this->assertEquals('/content/list/', $m->generateFromAlias($alias, array('controller'=>'content', 'action'=>'list')));
             $this->assertEquals('/content/show/10', $m->generateFromAlias($alias, array('controller'=>'content','action'=>'show','id'=>'10')));
         }
     }
@@ -298,14 +298,14 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $m->connect('viewpost/:id', array('controller'=>'post', 'action'=>'view'), null, 'post');
         $m->connect(':controller/:action/:id', null, null, 'controller');
 
-        $this->assertEquals('/archive/2004/11', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>'11')));
-        $this->assertEquals('/archive/2004/11', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>2004, 'month'=>11)));
-        $this->assertEquals('/archive/2004', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>2004)));
+        $this->assertEquals('/archive/2004/11/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>'11')));
+        $this->assertEquals('/archive/2004/11/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>2004, 'month'=>11)));
+        $this->assertEquals('/archive/2004/', $m->generate(array('controller'=>'blog', 'action'=>'view', 'year'=>2004)));
         $this->assertEquals('/viewpost/3', $m->generate(array('controller'=>'post', 'action'=>'view', 'id'=>3)));
 
-        $this->assertEquals('/archive/2004/11', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>'11')));
-        $this->assertEquals('/archive/2004/11', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>2004, 'month'=>11)));
-        $this->assertEquals('/archive/2004', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>2004)));
+        $this->assertEquals('/archive/2004/11/', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>'11')));
+        $this->assertEquals('/archive/2004/11/', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>2004, 'month'=>11)));
+        $this->assertEquals('/archive/2004/', $m->generateFromAlias('archive', array('controller'=>'blog', 'action'=>'view', 'year'=>2004)));
         $this->assertEquals('/viewpost/3', $m->generateFromAlias('post', array('controller'=>'post', 'action'=>'view', 'id'=>3)));
     }
 
@@ -342,8 +342,8 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/xml/articlerss/4/feed.xml', $m->generate(array('controller'=>'xml', 'action'=>'articlerss', 'id'=>4)));
         $this->assertEquals('/xml/rss/feed.xml', $m->generate(array('controller'=>'xml', 'action'=>'rss')));
         $this->assertEquals('/admin/comments/article/4/view/2', $m->generate(array('controller'=>'admin/comments', 'action'=>'view', 'article_id'=>4, 'id'=>2)));
-        $this->assertEquals('/admin/comments/article/4/index', $m->generate(array('controller'=>'admin/comments', 'action'=>'index', 'article_id'=>4)));
-        $this->assertEquals('/admin/comments/article/4', $m->generate(array('controller'=>'admin/comments', 'article_id'=>4, 'action'=>null)));
+        $this->assertEquals('/admin/comments/article/4/index/', $m->generate(array('controller'=>'admin/comments', 'action'=>'index', 'article_id'=>4)));
+        $this->assertEquals('/admin/comments/article/4/', $m->generate(array('controller'=>'admin/comments', 'article_id'=>4, 'action'=>null)));
         $this->assertEquals('/articles/2004/2/20/page/1', $m->generate(array('controller'=>'articles', 'action'=>'find_by_date', 'year'=>2004, 'month'=>2, 'day'=>20, 'page'=>1)));
         $this->assertEquals('/articles/category/bingo', $m->generate(array('controller'=>'articles', 'action'=>'category', 'id' => 'bingo')));
         $this->assertEquals('/xml/index/feed.xml', $m->generate(array('controller'=>'xml', 'action'=>'index')));
@@ -356,8 +356,8 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/xml/articlerss/4/feed.xml', $m->generateFromAlias('articles_rss', array('id'=>4)));
         $this->assertEquals('/xml/rss/feed.xml', $m->generateFromAlias('action_feed', array('action'=>'rss')));
         $this->assertEquals('/admin/comments/article/4/view/2', $m->generateFromAlias('article_comments', array('action'=>'view', 'article_id'=>4, 'id'=>2)));
-        $this->assertEquals('/admin/comments/article/4/index', $m->generateFromAlias('article_comments', array('action'=>'index', 'article_id'=>4)));
-        $this->assertEquals('/admin/comments/article/4', $m->generateFromAlias('article_comments', array('article_id'=>4, 'action'=>null)));
+        $this->assertEquals('/admin/comments/article/4/index/', $m->generateFromAlias('article_comments', array('action'=>'index', 'article_id'=>4)));
+        $this->assertEquals('/admin/comments/article/4/', $m->generateFromAlias('article_comments', array('article_id'=>4, 'action'=>null)));
         $this->assertEquals('/articles/2004/2/20/page/1', $m->generateFromAlias('articles_history', array('year'=>2004, 'month'=>2, 'day'=>20, 'page'=>1)));
         $this->assertEquals('/articles/category/bingo', $m->generateFromAlias('article_category', array('id' => 'bingo')));
         $this->assertEquals('/xml/index/feed.xml', $m->generateFromAlias('action_feed', array('action'=>'index')));
@@ -365,7 +365,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $m->generate(array('controller'=>'admin/comments', 'id'=>2)));
         $this->assertEquals(false, $m->generate(array('controller'=>'articles', 'action'=>'find_by_date', 'year'=>2004)));
-        
+
         $this->assertEquals(false, $m->generateFromAlias('article_comments', array('id'=>2)));
         $this->assertEquals(false, $m->generateFromAlias('article_history', array('year'=>2004)));
 
@@ -376,14 +376,14 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $m = Net_URL_Mapper::getInstance();
         $m->reset();
         $m->connect('test/:year', array('controller'=>'post', 'action'=>'show', 'year'=>null), array('year'=>'\d{4}'), 'test');
-        $this->assertEquals('/test', $m->generate(array('controller'=>'post', 'action'=>'show')));
-        $this->assertEquals('/test', $m->generate(array('controller'=>'post', 'action'=>'show', 'year'=>null)));
+        $this->assertEquals('/test/', $m->generate(array('controller'=>'post', 'action'=>'show')));
+        $this->assertEquals('/test/', $m->generate(array('controller'=>'post', 'action'=>'show', 'year'=>null)));
         $this->assertEquals('/test/2004', $m->generate(array('controller'=>'post', 'action'=>'show', 'year'=>2004)));
         $this->assertEquals(false, $m->generate(array('controller'=>'post', 'action'=>'show', 'year'=>'abcd')));
 
-        $this->assertEquals('/test', $m->generateFromAlias('test'));
-        $this->assertEquals('/test', $m->generateFromAlias('test', array('year'=>null)));
-        $this->assertEquals('/test', $m->generateFromAlias('test', array('year'=>false)));
+        $this->assertEquals('/test/', $m->generateFromAlias('test'));
+        $this->assertEquals('/test/', $m->generateFromAlias('test', array('year'=>null)));
+        $this->assertEquals('/test/', $m->generateFromAlias('test', array('year'=>false)));
         $this->assertEquals('/test/2004', $m->generateFromAlias('test', array('year'=>2004)));
         $this->assertEquals(false, $m->generateFromAlias('test', array('year'=>'abcd')));
     }
@@ -410,10 +410,10 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $m->reset();
         $m->setPrefix('/en');
         $m->connect(':controller/:action/:id', null, null, 'action');
-        $this->assertEquals('/en/content/view', $m->generate(array('controller'=>'content', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/en/content/view/', $m->generate(array('controller'=>'content', 'action'=>'view', 'id'=>null)));
         $this->assertEquals('/en/content/view/3', $m->generate(array('controller'=>'content', 'action'=>'view', 'id'=>3)));
 
-        $this->assertEquals('/en/content/view', $m->generateFromAlias('action', array('controller'=>'content', 'action'=>'view', 'id'=>null)));
+        $this->assertEquals('/en/content/view/', $m->generateFromAlias('action', array('controller'=>'content', 'action'=>'view', 'id'=>null)));
         $this->assertEquals('/en/content/view/3', $m->generateFromAlias('action', array('controller'=>'content', 'action'=>'view', 'id'=>3)));
     }
 
@@ -500,35 +500,5 @@ class GenerationTest extends PHPUnit_Framework_TestCase
                 'handle'=>'mansion')));
     }
 
-
-    // TODO:
-    // Ajoute validation avec visitor
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
