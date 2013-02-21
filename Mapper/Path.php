@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006, Bertrand Mansion <golgote@mamasam.com>
+ * Copyright (c) 2013, Bertrand Mansion <mansion@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,13 +35,11 @@
  *
  * @category   Net
  * @package    Net_URL_Mapper
- * @author     Bertrand Mansion <golgote@mamasam.com>
+ * @author     Bertrand Mansion <mansion@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Net_URL_Mapper
  */
 
-require_once 'Net/URL.php';
 require_once 'Net/URL/Mapper/Part/Dynamic.php';
 require_once 'Net/URL/Mapper/Part/Wildcard.php';
 require_once 'Net/URL/Mapper/Part/Fixed.php';
@@ -69,7 +67,7 @@ class Net_URL_Mapper_Path
 
     public function __construct($path = '', $defaults = array(), $rules = array(), $alias = null)
     {
-        $this->path = '/'.trim(Net_URL::resolvePath($path), '/');
+        $this->path = '/'.ltrim(Net_URL_Mapper::resolvePath($path), '/');
         $this->setDefaults($defaults);
         $this->setRules($rules);
         $this->setAlias($alias);
@@ -256,7 +254,7 @@ class Net_URL_Mapper_Path
         foreach ($this->parts as $part) {
             $path .= $part->generate($values);
         }
-        $path = '/'.trim(Net_URL::resolvePath($path), '/');
+        $path = '/'.ltrim(Net_URL_Mapper::resolvePath($path), '/');
         if (!empty($qstring)) {
             if(strpos($path, '?') === false) {
                 $path .= '?';
