@@ -41,6 +41,8 @@
  * @link       http://pear.php.net/package/Net_URL_Mapper
  */
 
+set_include_path('.:'.realpath(__DIR__.'/../../../').'/:/usr/local/lib/php/');
+
 /**
  * Mapper class
  */
@@ -65,9 +67,9 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(null, $m->match('/hello/world/how'));
         $this->assertEquals(null, $m->match('/hello/world/how/are/you/today'));
         $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('/hello/world/how/are/you'));
-        $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('/hello/world/how/are/you/'));
+        $this->assertEquals(null, $m->match('/hello/world/how/are/you/'));
         $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('hello/world/how/are/you'));
-        $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('hello/world/how/are/you/'));
+        $this->assertEquals(null, $m->match('hello/world/how/are/you/'));
     }
 
     public function testBasicDynamic()
@@ -82,7 +84,7 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(null, $m->match('/hi'));
             $this->assertEquals(null, $m->match('/hi/dude/what'));
             $this->assertEquals(array('controller'=>'content', 'name'=>'dude'), $m->match('/hi/dude'));
-            $this->assertEquals(array('controller'=>'content', 'name'=>'dude'), $m->match('/hi/dude/'));
+            $this->assertEquals(null, $m->match('/hi/dude/'));
         }
     }
 
@@ -133,7 +135,7 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(null, $m->match('/hi/dude/what'));
             $this->assertEquals(null, $m->match('/hi'));
             $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('/index/hi'));
-            $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('/index/hi/'));
+            $this->assertEquals(null, $m->match('/index/hi/'));
             $this->assertEquals(array('controller'=>'content', 'action'=>'dude'), $m->match('/dude/hi'));
         }
     }
@@ -384,27 +386,19 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
                 'section'=>'#default'), $m->match('/account/edit/mansion'));
     }
 
+    public function testTrailingSlash()
+    {
+        $m = Net_URL_Mapper::getInstance();
+        $m->connect('hello/world/how/are/you/', array('controller'=>'content', 'action'=>'index'));
+        $this->assertEquals(null, $m->match('/x'));
+        $this->assertEquals(null, $m->match('/hello/world/how'));
+        $this->assertEquals(null, $m->match('/hello/world/how/are/you/today'));
+        $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('/hello/world/how/are/you/'));
+        $this->assertEquals(null, $m->match('/hello/world/how/are/you'));
+        $this->assertEquals(array('controller'=>'content', 'action'=>'index'), $m->match('hello/world/how/are/you/'));
+        $this->assertEquals(null, $m->match('hello/world/how/are/you'));
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
