@@ -411,7 +411,7 @@ class Net_URL_Mapper
     */
     public static function resolvePath($path)
     {
-        if (empty($path)) {
+        if (!strlen($path)) {
             return '';
         }
         $normalized_path = $path;

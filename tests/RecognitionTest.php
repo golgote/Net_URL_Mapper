@@ -208,10 +208,11 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $m->match('/'));
         $this->assertEquals(null, $m->match('/archive'));
+        $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>null, 'day'=>null), $m->match('/archive/2004/'));
+        $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>"10", 'day'=>null), $m->match('/archive/2004/10/'));
         $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>null, 'day'=>null), $m->match('/archive/2004'));
-        $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>"10", 'day'=>null), $m->match('/archive/2004/10'));
+		$this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>"10", 'day'=>null), $m->match('/archive/2004/10'));
         $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>'2004', 'month'=>"10", 'day'=>"24"), $m->match('/archive/2004/10/24'));
-
     }
 
     public function testDefaults2()
@@ -222,7 +223,7 @@ class RecognitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $m->match('/'));
         $this->assertEquals(null, $m->match('/archive'));
-        $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>"2004", 'month'=>"10", 'day'=>null), $m->match('/archive/10'));
+        $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>"2004", 'month'=>"10", 'day'=>null), $m->match('/archive/10/'));
         $this->assertEquals(array('controller'=>'blog', 'action'=>'view', 'year'=>"2004", 'month'=>"10", 'day'=>"24"), $m->match('/archive/10/24'));
 
     }

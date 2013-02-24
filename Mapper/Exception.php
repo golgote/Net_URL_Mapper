@@ -5,8 +5,8 @@
  * PHP version 5
  *
  * LICENSE:
- * 
- * Copyright (c) 2006, Bertrand Mansion <golgote@mamasam.com> 
+ *
+ * Copyright (c) 2006, Bertrand Mansion <mansion@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,9 +16,9 @@
  *    * Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
  *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the 
+ *      notice, this list of conditions and the following disclaimer in the
  *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products 
+ *    * The names of the authors may not be used to endorse or promote products
  *      derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
@@ -35,7 +35,7 @@
  *
  * @category   Net
  * @package    Net_URL_Mapper
- * @author     Bertrand Mansion <golgote@mamasam.com>
+ * @author     Bertrand Mansion <mansion@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Net_URL_Mapper
@@ -44,7 +44,7 @@
 /**
  * Base class for exceptions in PEAR
  */
-require_once 'PEAR/Exception.php'; 
+require_once 'PEAR/Exception.php';
 
 /**
  * Base class for exceptions in Net_URL_Mapper package
@@ -100,5 +100,5 @@ class Net_URL_Mapper_InvalidException extends Net_URL_Mapper_Exception
     {
         return $this->url;
     }
-} 
+}
 ?>

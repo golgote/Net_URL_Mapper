@@ -5,8 +5,8 @@
  * PHP version 5
  *
  * LICENSE:
- * 
- * Copyright (c) 2006, Bertrand Mansion <golgote@mamasam.com>
+ *
+ * Copyright (c) 2006, Bertrand Mansion <mansion@php.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,9 +16,9 @@
  *    * Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
  *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the 
+ *      notice, this list of conditions and the following disclaimer in the
  *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products 
+ *    * The names of the authors may not be used to endorse or promote products
  *      derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
@@ -35,7 +35,7 @@
  *
  * @category   Net
  * @package    Net_URL_Mapper
- * @author     Bertrand Mansion <golgote@mamasam.com>
+ * @author     Bertrand Mansion <mansion@php.net>
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Net_URL_Mapper
@@ -48,13 +48,13 @@ abstract class Net_URL_Mapper_Part
     protected $public;
     protected $type;
     protected $required = false;
-    
+
     /**
     * Part name if dynamic or content, generated from path
     * @var string
     */
     public $content;
-    
+
     const DYNAMIC = 1;
     const WILDCARD = 2;
     const FIXED = 3;
@@ -71,7 +71,7 @@ abstract class Net_URL_Mapper_Part
     }
 
     abstract public function getFormat();
-    
+
     abstract public function getRule();
 
     public function addSlash($str)
@@ -89,8 +89,10 @@ abstract class Net_URL_Mapper_Part
 
     public function addSlashRegex($str)
     {
+    	$slash = false;
         $str = trim($str, '/');
         if (($pos = strpos($this->path, '/')) !== false) {
+        	$slash = true;
             if ($pos == 0) {
                 $str = '\/'.$str;
             } else {
@@ -98,7 +100,11 @@ abstract class Net_URL_Mapper_Part
             }
         }
         if (!$this->isRequired()) {
-            $str = '('.$str.'|)';
+        	if ($slash) {
+        		$str = '('.$str.'|\/|)';
+        	} else {
+        		$str = '('.$str.'|)';
+        	}
         }
         return $str;
     }
@@ -130,7 +136,7 @@ abstract class Net_URL_Mapper_Part
     }
 
     abstract public function generate($value = null);
-    
+
     public function match($value)
     {
         $rule = $this->getRule();

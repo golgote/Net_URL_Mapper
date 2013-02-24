@@ -71,6 +71,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $paths = array('first' => 'hi/:fred', 'second' => 'hi/:(fred)');
         foreach ($paths as $alias => $path) {
             $m->connect($path, array(), array(), $alias);
+
             $this->assertEquals('/hi/index', $m->generate(array('fred'=>'index')));
             $this->assertEquals('/hi/show', $m->generate(array('fred'=>'show')));
             $this->assertEquals('/hi/list+people', $m->generate(array('fred'=>'list people')));
@@ -136,7 +137,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/view/austere/chicago', $m->generateFromAlias('home', array('area'=>'chicago')));
 
         $this->assertEquals(array('home'=>'austere', 'area'=>'chicago'), $m->match('/view/austere/chicago'));
-        $this->assertEquals(array('home'=>'sumatra', 'area'=>null), $m->match('/view/sumatra'));
+        $this->assertEquals(array('home'=>'sumatra', 'area'=>null), $m->match('/view/sumatra/'));
 
         $m->reset();
 
@@ -147,7 +148,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/view/chicago', $m->generateFromAlias('city', array('home'=>null, 'area'=>'chicago')));
         $this->assertEquals('/view/chicago', $m->generateFromAlias('city', array('area'=>'chicago')));
 
-        $this->assertEquals(array('home'=>'chicago', 'area'=>null), $m->match('/view/chicago'));
+        $this->assertEquals(array('home'=>'chicago', 'area'=>null), $m->match('/view/chicago/'));
     }
 
 
@@ -182,7 +183,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/view/austere/chicago', $m->generateFromAlias('view', array('area'=>'chicago')));
 
         $this->assertEquals(array('home'=>'austere', 'area'=>'chicago'), $m->match('/view/austere/chicago'));
-        $this->assertEquals(array('home'=>'sumatra', 'area'=>null), $m->match('/view/sumatra'));
+        $this->assertEquals(array('home'=>'sumatra', 'area'=>null), $m->match('/view/sumatra/'));
 
         $m->reset();
 
@@ -193,7 +194,7 @@ class GenerationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/view/chicago', $m->generateFromAlias('view', array('home'=>null, 'area'=>'chicago')));
         $this->assertEquals('/view/chicago', $m->generateFromAlias('view', array('area'=>'chicago')));
 
-        $this->assertEquals(array('home'=>'chicago', 'area'=>null), $m->match('/view/chicago'));
+        $this->assertEquals(array('home'=>'chicago', 'area'=>null), $m->match('/view/chicago/'));
     }
 
     public function testDynamicWithRegexpCondition()
