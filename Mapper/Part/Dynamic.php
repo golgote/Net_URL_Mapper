@@ -41,8 +41,6 @@
  * @link       http://pear.php.net/package/Net_URL_Mapper
  */
 
-require_once 'Net/URL/Mapper/Part.php';
-
 class Net_URL_Mapper_Part_Dynamic extends Net_URL_Mapper_Part
 {
 

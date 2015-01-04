@@ -40,9 +40,6 @@
  * @link     http://pear.php.net/package/Net_URL_Mapper
  */
 
-require_once 'Net/URL/Mapper/Path.php';
-require_once 'Net/URL/Mapper/Exception.php';
-
 /**
  * URL parser and mapper class
  *
