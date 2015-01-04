@@ -1,0 +1,25 @@
+{
+    "authors": [
+        {
+            "email": "mansion@php.net",
+            "name": "Bertrand Mansion",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "Provides a simple and flexible way to build nice URLs for web applications.",
+    "license": "New BSD License",
+    "name": "golgote/net_url_mapper",
+    "support": {
+        "issues": "https://github.com/golgote/Net_URL_Mapper/issues",
+        "source": "https://github.com/golgote/Net_URL_Mapper"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "1.0.*@dev"
+    }
+}
